@@ -1,5 +1,12 @@
 class Pessoa:
     @property
+    def id (self):
+        return self.__id
+    @id.setter
+    def id(self,id):
+        self.__id = id
+    
+    @property
     def cpf(self):
         return self.__cpf
     @cpf.setter
