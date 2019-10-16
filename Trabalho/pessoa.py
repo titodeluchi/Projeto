@@ -1,6 +1,4 @@
 class Pessoa:
-    def __init__(self):
-
     @property
     def cpf(self):
         return self.__cpf
