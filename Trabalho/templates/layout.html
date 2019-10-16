@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css.css">
+    <title>Fumaça Transportes</title>
+</head>
+<body>
+    <div class="cabecalho">
+        <h1>Fumaça Transportes</h1>
+        <div class="menus">
+            <ul>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/cadastrar">Cadastrar</a>
+                </li>
+                <li>
+                    <a href="/listar">Listar</a>
+                </li>
+                <li>
+                    <a href="/edit_del">Atualizar/Deletar</a>
+                </li>                    
+            </ul> 
+        </div>
+    </div>
+    {% block index %}
+        <div class="carro">
+
+        </div>
+        <div class="onibus">
+
+        </div>
+        <div class="metro">
+        
+        </div>    
+
+    {% endblock %}
+</body>
+</html>
