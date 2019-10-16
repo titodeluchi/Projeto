@@ -11,7 +11,10 @@ body{
     width: 100%;
     height: 40%;
 }
-h1{
+.cabecalho h1, .cabecalho .menu{
+    display: inline-block;
+}
+.cabecalho h1{
     color: #F9F2E7;  
     text-transform: uppercase;  
 }
@@ -36,11 +39,35 @@ h1{
     width: 33%;
     height: 60%;
 }
+.carro p{
+    width: 100%;
+    height: 30%;
+}
+.carro img{
+    width: 100%;
+    height: 70%;
+}
 .onibus{
     width: 33%;
     height: 60%;
 }
+.onibus p{
+    width: 100%;
+    height: 30%;
+}
+.onibus img{
+    width: 100%;
+    height: 70%;
+}
 .metro{
     width: 33%;
     height: 60%;
+}
+.metro p{
+    width: 100%;
+    height: 30%;
+}
+.metro img{
+    width: 100%;
+    height: 70%;
 }
