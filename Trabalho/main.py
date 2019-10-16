@@ -4,6 +4,15 @@ import MySQLdb
 
 ####   PESSOA
 
+pessoa = Pessoa()
+
+def cadastrar_pessoa_db():
+    conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
+    cursor = conexao.cursor()
+    cursor.execute("INSERT INTO PESSOA ('CPF' , 'NOME') VALUES ('{}', '{}')".format(pessoa.cpf, pessoa.nome))
+    conexao.commit()
+    conexao.close()
+
 def listar_pessoa_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
@@ -18,9 +27,7 @@ def listar_pessoa_db():
     conexao.close()
     return listar_pessoa
 
-def cadastrar_pessoa_db():
-    conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
-    cursor = conexao.cursor()
-    cursor.execute("INSERT INTO PESSOA ('CPF' , 'NOME') VALUES ('{}', '{}')".format(pessoa.cpf, pessoa.nome))
-    conexao.commit()
-    conexao.close()
+
+
+#####ROTAS###
+
