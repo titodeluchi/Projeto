@@ -1,0 +1,46 @@
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    float: left;
+    background: #343838;
+    border: #008C9E 5px solid;
+}
+.cabecalho{
+    width: 100%;
+    height: 40%;
+}
+h1{
+    color: #F9F2E7;  
+    text-transform: uppercase;  
+}
+.cabecalho .menu{
+    width: 100%;
+    height: 50%;
+    list-style: none;
+}
+.cabecalho .menu li{
+    float: left;
+    padding: 0.5em 0.5em;
+}
+.cabecalho .menu li:hover{
+    background: #005F6B;
+}
+.cabecalho .menu li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #F9F2E7;
+}    
+.carro{
+    width: 33%;
+    height: 60%;
+}
+.onibus{
+    width: 33%;
+    height: 60%;
+}
+.metro{
+    width: 33%;
+    height: 60%;
+}
