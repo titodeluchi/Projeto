@@ -2,6 +2,19 @@
 
 {% block index %}
 
+    <h1>Cadastrar Transporte!</h1>
+    <a href="/produto/lista">Listagem</a>
+
+    <div class= "formulario">
+        <form action="/produto/salvar" method="POST"> 
+            <input class="input" type="text" placeholder="nome" name="nome"> 
+            <input class="input" type="text" placeholder="descrição" name="descricao">
+            <input type="submit" value="salvar">
+
+        
+        </form>
+
+    </div>  
 
 
 
