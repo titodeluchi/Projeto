@@ -232,62 +232,65 @@ def buscar_em_distancia(id):
 
 
 ##############################  VALOR ############################### VALOR ######################### VALOR ############################# ##############################
-
+#########################################################################################################################################################################
 
 valores = Valores()
 
 def cadastrar_valores_db(Transporte):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO VALORES ('VALOR_TRANS_ID' ,'VALOR') VALUES ('{}', '{}')".format(distancia.distancia_trans_id , distancia.km))
+    cursor.execute("INSERT INTO VALORES ('VALOR_TRANS_ID' ,'VALOR') VALUES ('{}', '{}')".format(valores.valor_trans_id , valores,valor))
     conexao.commit()
     conexao.close()
 
-def listar_distancia_db():
+def listar_valores_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("SELECT * DISTANCIA")
-    listar_distancia = []
+    cursor.execute("SELECT * VALORES")
+    listar_valor = []
     for i in cursor.fetchall():
-        distancia = Distancia()
-        distancia.id[0]
-        distancia.distancia_trans_id[1]
-        distancia.km[2]
-        listar_distancia.append(distancia)    
+        valores = Valores()
+        valores.id = i[0]
+        valores.valores_trans_id= i[1]
+        valores.valor= i[2]
+        listar_valor.append(valores)    
     conexao.close()
-    return listar_distancia
+    return listar_valor
 
-def editar_distancia_db(distancia:Distancia):
+def editar_valor_db(valores:Valores):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE DISTANCIA SET( DISTANCIA_TRANS_ID='{}', KM='{}') WHERE ID={}"
-    .format(distancia.distancia_trans_id, distancia.km,  distancia.id))
+    cursor.execute("UPDATE VALORES SET( VALORES_TRANS_ID='{}', VALOR='{}') WHERE ID={}"
+    .format(valores.valores_trans_id, valores.valor,  valores.id))
     conexao.commit()
     conexao.close()
 
 
-def deletar_distancia():
+def deletar_valor():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("DELETE FROM DISTANCIA WHERE ID={}".format(id))
+    cursor.execute("DELETE FROM VALORES WHERE ID={}".format(id))
     conexao.commit()
     conexao.close()
 
 
 
-def buscar_em_distancia(id):
+def buscar_em_valores(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute('SELECT * FROM DISTANCIA WHERE ID ={}'.format(id))
-    dist = Distancia()
+    cursor.execute('SELECT * FROM VALORES WHERE ID ={}'.format(id))
+    valor = Valores()
     for i in cursor.fetchall():
-        dist.id = i[0]
-        dist.distancia_trans_id = i[1]
-        dist.km = i[2]
+        valor.id = i[0]
+        valor.valores_trans_id = i[1]
+        valor.valor = i[2]
     conexao.close()
-    return dist
+    return valor
 
 
 
 #####ROTAS###
 
+
+@app.route
+def 
