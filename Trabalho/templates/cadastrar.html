@@ -3,12 +3,15 @@
 {% block index %}
 
     <h1>Cadastrar Transporte!</h1>
-    <a href="/produto/lista">Listagem</a>
 
     <div class= "formulario">
-        <form action="/produto/salvar" method="POST"> 
+        <form action="/geral/salvar" method="POST">
+            <input class="input" type="text" placeholder="cpf" name="nome">
             <input class="input" type="text" placeholder="nome" name="nome"> 
-            <input class="input" type="text" placeholder="descrição" name="descricao">
+            <input class="input" type="text" placeholder="tipo" name="tipo">
+            <input class="input" type="text" placeholder="inicial" name="inicial">
+            <input class="input" type="text" placeholder="final" name="final">
+            <input class="input" type="text" placeholder="km" name="quilometros">
             <input type="submit" value="salvar">
 
         

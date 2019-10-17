@@ -10,12 +10,14 @@ import MySQLdb
 
 pessoa = Pessoa()
 
-def cadastrar_pessoa_db(pessoa):
+def cadastrar_pessoa_db(nome, cpf):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
     cursor.execute("INSERT INTO PESSOA ('CPF' , 'NOME') VALUES ('{}', '{}')".format(pessoa.cpf, pessoa.nome))
     conexao.commit()
+    pessoa_id = cursor.lastrowid
     conexao.close()
+    return pessoa_id
 
 def listar_pessoa_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
@@ -291,6 +293,40 @@ def buscar_em_valores(id):
 
 #####ROTAS###
 
+app = Flask(__name__)
 
-@app.route
-def 
+
+@app.route('/')
+def inicio():
+    return render_template('index.html')
+
+@app.route('/cadastrar')
+def cadastrar():
+    return render_template('cadastrar.html')
+
+@app.route('/geral/salvar' , methods=['POST'])
+def salvar_todos():
+    nome = request.form['nome']
+    cpf = request.form['cpf']
+
+    tipo_trans = request.form['tipo']
+    
+    destino_inicial = request.form['inicial']
+    destino_final = request.form['final']
+
+    
+    km = request.form['quilometros']
+    
+    
+    valor = request.form['valor']
+    
+    id_pessoa = cadastrar_pessoa_db(nome, cpf)
+
+    destino_trans_id =  cadastrar_tipo_transporte_db(id_pessoa, tipo_trans)
+
+
+    cadastrar_destino_trans_db(destino_trans_id, destino_inicial, destino_final)
+
+
+
+app.run()
