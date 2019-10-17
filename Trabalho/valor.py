@@ -17,5 +17,5 @@ class Valores:
     def valores(self):
         return self.__valor
     @valores.setter
-    def valores(self,valores):
+    def valores(self,valor):
         self.__valor = valor    
