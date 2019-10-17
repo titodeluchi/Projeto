@@ -304,28 +304,28 @@ def inicio():
 def cadastrar():
     return render_template('cadastrar.html')
 
-@app.route('/geral/salvar' , methods=['POST'])
-def salvar_todos():
-    nome = request.form['nome']
-    cpf = request.form['cpf']
+# @app.route('/geral/salvar' , methods=['POST'])
+# def salvar_todos():
+#     nome = request.form['nome']
+#     cpf = request.form['cpf']
 
-    tipo_trans = request.form['tipo']
+#     tipo_trans = request.form['tipo']
     
-    destino_inicial = request.form['inicial']
-    destino_final = request.form['final']
+#     destino_inicial = request.form['inicial']
+#     destino_final = request.form['final']
 
     
-    km = request.form['quilometros']
+#     km = request.form['quilometros']
     
     
-    valor = request.form['valor']
+#     valor = request.form['valor']
     
-    id_pessoa = cadastrar_pessoa_db(nome, cpf)
+#     id_pessoa = cadastrar_pessoa_db(nome, cpf)
 
-    destino_trans_id =  cadastrar_tipo_transporte_db(id_pessoa, tipo_trans)
+#     destino_trans_id =  cadastrar_tipo_transporte_db(id_pessoa, tipo_trans)
 
 
-    cadastrar_destino_trans_db(destino_trans_id, destino_inicial, destino_final)
+#     cadastrar_destino_trans_db(destino_trans_id, destino_inicial, destino_final)
 
 
 
