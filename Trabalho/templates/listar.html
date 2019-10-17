@@ -2,7 +2,38 @@
 
 {% block index %}
 
+<h1>Lista de transportes!</h1>
 
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nome</th>
+            <th>cpf</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in lista %}
+        
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.nome}}</td>
+                <td>{{i.descricao}}</td>
+                <td>
+                    <a href="/produto/delete?id={{i.id}}">Deletar</a>
+                    <a href="/produto/alterar?id={{i.id}}">Alterar</a>
+                </td>
+            
+            </tr>
+        {% endfor %}
+
+    </tbody>
+
+
+
+    
+</table>
 
 
 {% endblock %}

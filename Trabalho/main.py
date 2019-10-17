@@ -3,7 +3,7 @@ from pessoa import Pessoa
 from tipo_transporte import Transporte
 from destino import Destino
 from distancia import Distancia
-from valor import Valor
+from valor import Valores
 import MySQLdb
 
 ####################         ########   PESSOA    ################   ####################
