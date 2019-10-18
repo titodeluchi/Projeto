@@ -71,7 +71,9 @@ def cadastrar_tipo_transporte_db(Transporte):
     cursor = conexao.cursor()
     cursor.execute("INSERT INTO TIPO_TRANSPORTE ('PESSOA_ID' ,'TIPO') VALUES ('{}', '{}')".format(tipo_transporte.pessoa_id , tipo_transporte.tipo))
     conexao.commit()
+    transporte_id = cursor.lastrowid
     conexao.close()
+    return transporte_id
 
 def listar_tipo_transporte_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
@@ -322,7 +324,7 @@ def cadastrar():
     
 #     id_pessoa = cadastrar_pessoa_db(nome, cpf)
 
-#     destino_trans_id =  cadastrar_tipo_transporte_db(id_pessoa, tipo_trans)
+#     transporte_id =  cadastrar_tipo_transporte_db(id_pessoa, tipo_trans)
 
 
 #     cadastrar_destino_trans_db(destino_trans_id, destino_inicial, destino_final)
@@ -330,3 +332,15 @@ def cadastrar():
 
 
 app.run()
+
+
+
+
+# ef cadastrar_pessoa_db(nome, cpf):
+#     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
+#     cursor = conexao.cursor()
+#     cursor.execute("INSERT INTO PESSOA ('CPF' , 'NOME') VALUES ('{}', '{}')".format(pessoa.cpf, pessoa.nome))
+#     conexao.commit()
+#     pessoa_id = cursor.lastrowid
+#     conexao.close()
+#     return pessoa_id
