@@ -8,12 +8,12 @@ import MySQLdb
 
 ####################         ########   PESSOA    ################   ####################
 
-pessoa = Pessoa()
 
-def cadastrar_pessoa_db(cpf, nome):
+
+def cadastrar_pessoa_db(pessoa):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO PESSOA ('CPF' , 'NOME') VALUES ('{}', '{}')".format(pessoa.cpf, pessoa.nome))
+    cursor.execute("INSERT INTO pessoa ('cpf' , 'nome') VALUES ('{}', '{}')".format(pessoa.cpf, pessoa.nome))
     conexao.commit()
     pessoa_id = cursor.lastrowid
     conexao.close()
@@ -22,7 +22,7 @@ def cadastrar_pessoa_db(cpf, nome):
 def listar_pessoa_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("SELECT * FROM PESSOA")
+    cursor.execute("SELECT * FROM pessoa")
     listar_pessoa = []
     for i in cursor.fetchall():
         pessoa = Pessoa()
@@ -38,14 +38,14 @@ def listar_pessoa_db():
 def deletar_pessoa(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("DELETE FROM PESSOA WHERE ID={}".format(id))
+    cursor.execute("DELETE FROM pessoa WHERE id={}".format(id))
     conexao.commit()
     conexao.close()
 
 def alterar_pessoa_db(pessoa:Pessoa):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE PESSOA SET( CPF='{}', NOME='{}') WHERE ID={}"
+    cursor.execute("UPDATE pessoa SET( cpf='{}', nome='{}') WHERE id={}"
     .format(pessoa.cpf, pessoa.nome, pessoa.id))
     conexao.commit()
     conexao.close()
@@ -53,7 +53,7 @@ def alterar_pessoa_db(pessoa:Pessoa):
 def buscar_pessoa_por_id(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute('SELECT * FROM PESSOA WHERE ID ={}'.format(id))
+    cursor.execute('SELECT * FROM pessoa WHERE id ={}'.format(id))
     p = Pessoa()
     for i in cursor.fetchall():
         p.id = i[0]
@@ -66,10 +66,10 @@ def buscar_pessoa_por_id(id):
 
 tipo_transporte = Transporte()
 
-def cadastrar_tipo_transporte_db(tipo_transporte, pessoa_id):
+def cadastrar_tipo_transporte_db(tipodetransporte):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO TIPO_TRANSPORTE ('TIPO', 'PESSOA_ID') VALUES ('{}', '{}')".format(tipo_transporte.tipo, tipo_transporte.pessoa_id ))
+    cursor.execute("INSERT INTO tipo_transporte ('tipo', 'pessoa_id ) VALUES ('{}', '{}')".format(tipodetransporte.tipo, tipodetransporte.pessoa_id ))
     conexao.commit()
     transporte_id = cursor.lastrowid
     conexao.close()
@@ -78,7 +78,7 @@ def cadastrar_tipo_transporte_db(tipo_transporte, pessoa_id):
 def listar_tipo_transporte_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("SELECT * FROM TIPO_TRANSPORTE")
+    cursor.execute("SELECT * FROM tipo_transporte")
     listar_tipo_transporte = []
     for i in cursor.fetchall():
         tipo_transporte = Transporte()
@@ -92,7 +92,7 @@ def listar_tipo_transporte_db():
 def editar_tipo_transporte_por_id_db(tipo_transporte:Transporte):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE PESSOA SET( PESSOA_ID='{}', TIPO='{}') WHERE ID={}"
+    cursor.execute("UPDATE pessoa SET( pessoa_id='{}', TIPO='{}') WHERE id={}"
     .format(tipo_transporte.pessoa_id, tipo_transporte.tipo, tipo_transporte.id))
     conexao.commit()
     conexao.close()
@@ -101,7 +101,7 @@ def editar_tipo_transporte_por_id_db(tipo_transporte:Transporte):
 def deletar_tipo_transporte():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("DELETE FROM TIPO_TRANSPORTE WHERE ID={}".format(id))
+    cursor.execute("DELETE FROM tipo_transporte WHERE id={}".format(id))
     conexao.commit()
     conexao.close()
 
@@ -110,7 +110,7 @@ def deletar_tipo_transporte():
 def buscar_tipo_transporte_por_id(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute('SELECT * FROM TIPO_TRANSPORTE WHERE ID ={}'.format(id))
+    cursor.execute('SELECT * FROM tipo_transporte WHERE id ={}'.format(id))
     t = Transporte()
     for i in cursor.fetchall():
         t.id = i[0]
@@ -125,10 +125,10 @@ def buscar_tipo_transporte_por_id(id):
 
 destino = Destino()
 
-def cadastrar_destino_trans_db(destino_trans_id , inicial , final ):
+def cadastrar_destino_trans_db(destino):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO DESTINO ('DESTINO_TRANS_ID' ,'INICIAL','FINAL') VALUES ('{}', '{}','{}')".format(destino.destino_trans_id , destino.inicial , destino.final))
+    cursor.execute("INSERT INTO destino ('destino_trans_id' ,'inicial','final') VALUES ('{}', '{}','{}')".format(destino.destino_trans_id , destino.inicial , destino.final))
     conexao.commit()
     destino_id = cursor.lastrowid
     conexao.close()
@@ -137,7 +137,7 @@ def cadastrar_destino_trans_db(destino_trans_id , inicial , final ):
 def listar_destino_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("SELECT * DESTINO")
+    cursor.execute("SELECT * destino")
     listar_destino = []
     for i in cursor.fetchall():
         destino = Destino()
@@ -151,7 +151,7 @@ def listar_destino_db():
 def editar_destino_db(destino:Destino):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE DESTINO SET( DESTINO_TRANS_ID='{}', INICIAL='{}', FINAL='{}') WHERE ID={}"
+    cursor.execute("UPDATE destino SET( destino_trans_id ='{}', inicial='{}', final='{}') WHERE id={}"
     .format(destino.destino_trans_id, destino.inicial,  destino.final, destino.id))
     conexao.commit()
     conexao.close()
@@ -160,7 +160,7 @@ def editar_destino_db(destino:Destino):
 def deletar_destino():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("DELETE FROM DESTINO WHERE ID={}".format(id))
+    cursor.execute("DELETE FROM destino WHERE id={}".format(id))
     conexao.commit()
     conexao.close()
 
@@ -169,7 +169,7 @@ def deletar_destino():
 def buscar_em_destino(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute('SELECT * FROM DESTINO WHERE ID ={}'.format(id))
+    cursor.execute('SELECT * FROM destino WHERE id ={}'.format(id))
     d = Destino()
     for i in cursor.fetchall():
         d.id = i[0]
@@ -184,10 +184,10 @@ def buscar_em_destino(id):
 
 distancia = Distancia()
 
-def cadastrar_distancia_trans_db(distancia_trans_id , km):
+def cadastrar_distancia_trans_db(distancia):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO DISTANCIA ('DISTANCIA_TRANS_ID' ,'KM') VALUES ('{}', '{}')".format(distancia.distancia_trans_id , distancia.km))
+    cursor.execute("INSERT INTO distancia ('distancia_trans_id' ,'km') VALUES ('{}', '{}')".format(distancia.distancia_trans_id , distancia.km))
     conexao.commit()
     conexao.close()
 
@@ -195,7 +195,7 @@ def cadastrar_distancia_trans_db(distancia_trans_id , km):
 def listar_distancia_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("SELECT * DISTANCIA")
+    cursor.execute("SELECT * distancia")
     listar_distancia = []
     for i in cursor.fetchall():
         distancia = Distancia()
@@ -209,7 +209,7 @@ def listar_distancia_db():
 def editar_distancia_db(distancia:Distancia):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE DISTANCIA SET( DISTANCIA_TRANS_ID='{}', KM='{}') WHERE ID={}"
+    cursor.execute("UPDATE distancia SET( distancia_trans_id='{}', km='{}') WHERE id={}"
     .format(distancia.distancia_trans_id, distancia.km,  distancia.id))
     conexao.commit()
     conexao.close()
@@ -218,7 +218,7 @@ def editar_distancia_db(distancia:Distancia):
 def deletar_distancia():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("DELETE FROM DISTANCIA WHERE ID={}".format(id))
+    cursor.execute("DELETE FROM distancia WHERE id={}".format(id))
     conexao.commit()
     conexao.close()
 
@@ -227,7 +227,7 @@ def deletar_distancia():
 def buscar_em_distancia(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute('SELECT * FROM DISTANCIA WHERE ID ={}'.format(id))
+    cursor.execute('SELECT * FROM distancia WHERE id ={}'.format(id))
     dist = Distancia()
     for i in cursor.fetchall():
         dist.id = i[0]
@@ -243,10 +243,10 @@ def buscar_em_distancia(id):
 
 valores = Valores()
 
-def cadastrar_valores_db(valor_trans_id , valor):
+def cadastrar_valores_db(valor):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO VALORES ('VALOR_TRANS_ID' ,'VALOR') VALUES ('{}', '{}')".format(valores.valores_trans_id , valores.valor))
+    cursor.execute("INSERT INTO valor ('valor_trans_id' ,'valor') VALUES ('{}', '{}')".format(valores.valores_trans_id , valores.valor))
     conexao.commit()
     conexao.close()
     
@@ -254,7 +254,7 @@ def cadastrar_valores_db(valor_trans_id , valor):
 def listar_valores_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("SELECT * VALORES")
+    cursor.execute("SELECT * valor")
     listar_valor = []
     for i in cursor.fetchall():
         valores = Valores()
@@ -268,7 +268,7 @@ def listar_valores_db():
 def editar_valor_db(valores:Valores):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE VALORES SET( VALORES_TRANS_ID='{}', VALOR='{}') WHERE ID={}"
+    cursor.execute("UPDATE valor SET( valor_trans_id='{}', valor='{}') WHERE id={}"
     .format(valores.valores_trans_id, valores.valor,  valores.id))
     conexao.commit()
     conexao.close()
@@ -277,7 +277,7 @@ def editar_valor_db(valores:Valores):
 def deletar_valor():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("DELETE FROM VALORES WHERE ID={}".format(id))
+    cursor.execute("DELETE FROM valor WHERE id={}".format(id))
     conexao.commit()
     conexao.close()
 
@@ -286,7 +286,7 @@ def deletar_valor():
 def buscar_em_valores(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute('SELECT * FROM VALORES WHERE ID ={}'.format(id))
+    cursor.execute('SELECT * FROM valor WHERE id ={}'.format(id))
     valor = Valores()
     for i in cursor.fetchall():
         valor.id = i[0]
@@ -318,13 +318,39 @@ def salvar_todos():
     destino_inicial = request.form['inicial']
     destino_final = request.form['final']  
     km = request.form['km']  
-    valor = request.form['valor'] 
-    id_pessoa = cadastrar_pessoa_db(cpf, nome)
-    tipo_transporte_id =  cadastrar_tipo_transporte_db(tipo_trans, id_pessoa)
-    cadastrar_destino_trans_db(tipo_transporte_id,  destino_inicial, destino_final)
-    cadastrar_distancia_trans_db(tipo_transporte_id, km)
-    cadastrar_valores_db(tipo_transporte_id, valor)
+    valor = request.form['valor']
+    pessoa = Pessoa()
+    pessoa.nome = nome
+    pessoa.cpf = cpf 
+    id_pessoa = cadastrar_pessoa_db(pessoa)
+    tipodetransporte = Transporte()
+    tipodetransporte.pessoa_id = id_pessoa
+    tipodetransporte.tipo = tipo_trans
+    tipo_transporte_id =  cadastrar_tipo_transporte_db(tipodetransporte)
+    
+    destino = Destino()
+    destino.destino_trans_id = tipo_transporte_id
+    destino.inicial = destino_inicial
+    destino.final = destino_final
+    cadastrar_destino_trans_db(destino)
+    # cadastrar_destino_trans_db(tipo_transporte_id,  destino_inicial, destino_final)
+
+    
+    distancia = Distancia()
+    distancia.distancia_trans_id = tipo_transporte_id
+    distancia.km = km
+    cadastrar_distancia_trans_db(distancia)
+    # cadastrar_distancia_trans_db(tipo_transporte_id, km)
+    valor1 = Valores()
+    valor1.valores_trans_id = tipo_transporte_id
+    valor1.valores = valor
+    cadastrar_valores_db(valor)
+    # cadastrar_valores_db(tipo_transporte_id, valor)
+
+    
+
     return redirect('/')
+
     
 
 @app.route('/lista')
