@@ -5,7 +5,7 @@
 <h1>Lista de transportes!</h1>
 
 <table>
-    <thead></thead>
+    <thead>
         <tr>
             <th>id</th>
             <th>Nome</th>
@@ -13,16 +13,23 @@
             <th>Tipo Transporte</th>
             <th>Destino Inicial</th>
             <th>Destino Final</th>
-            <th>KM                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </th>
+            <th>Km</th> 
+            <th>Valor</th>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </th>
         </tr>
     </thead>
     <tbody>
+        
         {% for i in lista %}
         
             <tr>
                 <td>{{i.id}}</td>
                 <td>{{i.nome}}</td>
-                <td>{{i.descricao}}</td>
+                <td>{{i.cpf}}</td>
+                <td>{{i.tipo}}</td>
+                <td>{{i.destino_inicial}}</td>
+                <td>{{i.destino_final}}</td>
+                <td>{{i.km}}</td>
+                <td>{{i.valor}}</td>                                               
                 <td>
                     <a href="/produto/delete?id={{i.id}}">Deletar</a>
                     <a href="/produto/alterar?id={{i.id}}">Alterar</a>
@@ -31,11 +38,7 @@
             </tr>
         {% endfor %}
 
-    </tbody>
-
-
-
-    
+    </tbody>    
 </table>
 
 

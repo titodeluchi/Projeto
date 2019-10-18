@@ -10,7 +10,7 @@ class Destino:
     def destino_trans_id(self):
         return self.__destino_trans_id
     @destino_trans_id.setter
-    def cpf(self,destino_trans_id):
+    def destino_trans_id(self,destino_trans_id):
         self.__destino_trans_id = destino_trans_id
 
     @property
