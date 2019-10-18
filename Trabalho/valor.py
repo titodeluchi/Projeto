@@ -10,8 +10,10 @@ class Valores:
     def valores_trans_id(self):
         return self.__valor_trans_id
     @valores_trans_id.setter
-    def cpf(self,valor_trans_id):
-        self.__valor_trans_id = valor_trans_id
+    def valores_trans_id(self,valor_trans_id):
+        self.__valor_trans_id = valor_trans_id 
+        
+
 
     @property
     def valores(self):

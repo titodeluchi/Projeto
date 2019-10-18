@@ -6,19 +6,16 @@ body{
     margin: 0;
     padding: 0;
     float: left;
-    background: #343838;
-    border: #008C9E 5px solid;
+    background: white;
 }
 .cabecalho{
     width: 100%;
     height: 40%;
 }
-.cabecalho h1, .cabecalho .menu{
-    display: inline-block;
-}
 .cabecalho h1{
-    color: #F9F2E7;  
-    text-transform: uppercase;  
+    color: black;  
+    text-transform: uppercase;
+    text-align: center;  
 }
 .cabecalho .menu{
     width: 100%;
@@ -35,7 +32,7 @@ body{
 .cabecalho .menu li a {
     text-decoration: none;
     text-transform: uppercase;
-    color: #F9F2E7;
+    color: black;
 }    
 .corpo{
     width: 100%;
@@ -44,14 +41,20 @@ body{
 .titulo{
     width: 100%;
     height: 40%;
+    text-align: center;
+    color: black;
+    border: 2px solid rgb(188, 101, 223);   
 }
 .carro{
     width: 33%;
-    height: 60%;
+    height: 70%;
+    color: black;
+    border: 2px solid rgb(188, 101, 223);  
 }
 .carro p{
     width: 100%;
     height: 30%;
+    
 }
 .carro img{
     width: 100%;
@@ -60,6 +63,8 @@ body{
 .onibus{
     width: 33%;
     height: 60%;
+    color: black;
+    border: 2px solid rgb(188, 101, 223);  
 }
 .onibus p{
     width: 100%;
@@ -71,7 +76,9 @@ body{
 }
 .metro{
     width: 33%;
-    height: 60%;
+    height: 70%;
+    color: black;
+    border: 2px solid rgb(188, 101, 223);  
 }
 .metro p{
     width: 100%;
@@ -80,4 +87,7 @@ body{
 .metro img{
     width: 100%;
     height: 70%;
+}
+.carro, .metro, .onibus{
+    float: left;
 }

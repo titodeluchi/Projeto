@@ -10,7 +10,7 @@ import MySQLdb
 
 pessoa = Pessoa()
 
-def cadastrar_pessoa_db(nome, cpf):
+def cadastrar_pessoa_db(cpf, nome):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
     cursor.execute("INSERT INTO PESSOA ('CPF' , 'NOME') VALUES ('{}', '{}')".format(pessoa.cpf, pessoa.nome))
@@ -38,7 +38,7 @@ def listar_pessoa_db():
 def deletar_pessoa(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("DELETE FROM PESSOA WHERE id={}".format(id))
+    cursor.execute("DELETE FROM PESSOA WHERE ID={}".format(id))
     conexao.commit()
     conexao.close()
 
@@ -66,12 +66,14 @@ def buscar_pessoa_por_id(id):
 
 tipo_transporte = Transporte()
 
-def cadastrar_tipo_transporte_db(Transporte):
+def cadastrar_tipo_transporte_db(tipo_transporte, pessoa_id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO TIPO_TRANSPORTE ('PESSOA_ID' ,'TIPO') VALUES ('{}', '{}')".format(tipo_transporte.pessoa_id , tipo_transporte.tipo))
+    cursor.execute("INSERT INTO TIPO_TRANSPORTE ('TIPO', 'PESSOA_ID') VALUES ('{}', '{}')".format(tipo_transporte.tipo, tipo_transporte.pessoa_id ))
     conexao.commit()
+    transporte_id = cursor.lastrowid
     conexao.close()
+    return transporte_id
 
 def listar_tipo_transporte_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
@@ -123,12 +125,14 @@ def buscar_tipo_transporte_por_id(id):
 
 destino = Destino()
 
-def cadastrar_destino_trans_db(Transporte):
+def cadastrar_destino_trans_db(destino_trans_id , inicial , final ):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
     cursor.execute("INSERT INTO DESTINO ('DESTINO_TRANS_ID' ,'INICIAL','FINAL') VALUES ('{}', '{}','{}')".format(destino.destino_trans_id , destino.inicial , destino.final))
     conexao.commit()
+    destino_id = cursor.lastrowid
     conexao.close()
+    return destino_id
 
 def listar_destino_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
@@ -180,12 +184,13 @@ def buscar_em_destino(id):
 
 distancia = Distancia()
 
-def cadastrar_distancia_trans_db(Transporte):
+def cadastrar_distancia_trans_db(distancia_trans_id , km):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
     cursor.execute("INSERT INTO DISTANCIA ('DISTANCIA_TRANS_ID' ,'KM') VALUES ('{}', '{}')".format(distancia.distancia_trans_id , distancia.km))
     conexao.commit()
     conexao.close()
+
 
 def listar_distancia_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
@@ -238,12 +243,13 @@ def buscar_em_distancia(id):
 
 valores = Valores()
 
-def cadastrar_valores_db(Transporte):
+def cadastrar_valores_db(valor_trans_id , valor):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO VALORES ('VALOR_TRANS_ID' ,'VALOR') VALUES ('{}', '{}')".format(valores.valor_trans_id , valores,valor))
+    cursor.execute("INSERT INTO VALORES ('VALOR_TRANS_ID' ,'VALOR') VALUES ('{}', '{}')".format(valores.valores_trans_id , valores.valor))
     conexao.commit()
     conexao.close()
+    
 
 def listar_valores_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
@@ -304,29 +310,25 @@ def inicio():
 def cadastrar():
     return render_template('cadastrar.html')
 
-# @app.route('/geral/salvar' , methods=['POST'])
-# def salvar_todos():
-#     nome = request.form['nome']
-#     cpf = request.form['cpf']
-
-#     tipo_trans = request.form['tipo']
+@app.route('/geral/salvar' , methods=['POST'])
+def salvar_todos():
+    nome = request.form['nome']
+    cpf = request.form['cpf']
+    tipo_trans = request.form['tipo']   
+    destino_inicial = request.form['inicial']
+    destino_final = request.form['final']  
+    km = request.form['km']  
+    valor = request.form['valor'] 
+    id_pessoa = cadastrar_pessoa_db(cpf, nome)
+    tipo_transporte_id =  cadastrar_tipo_transporte_db(tipo_trans, id_pessoa)
+    cadastrar_destino_trans_db(tipo_transporte_id,  destino_inicial, destino_final)
+    cadastrar_distancia_trans_db(tipo_transporte_id, km)
+    cadastrar_valores_db(tipo_transporte_id, valor)
+    return redirect('/')
     
-#     destino_inicial = request.form['inicial']
-#     destino_final = request.form['final']
 
-    
-#     km = request.form['quilometros']
-    
-    
-#     valor = request.form['valor']
-    
-#     id_pessoa = cadastrar_pessoa_db(nome, cpf)
-
-#     destino_trans_id =  cadastrar_tipo_transporte_db(id_pessoa, tipo_trans)
-
-
-#     cadastrar_destino_trans_db(destino_trans_id, destino_inicial, destino_final)
-
-
+@app.route('/lista')
+def listar():
+    return render_template('listar.html')
 
 app.run()
