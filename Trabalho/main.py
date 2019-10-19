@@ -10,10 +10,11 @@ import MySQLdb
 
 
 
-def cadastrar_pessoa_db(pessoa):
+def cadastrar_pessoa_db(cpf, nome):   
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO pessoa ('cpf' , 'nome') VALUES ('{}', '{}')".format(pessoa.cpf, pessoa.nome))
+    cursor.execute("INSERT INTO pessoa (cpf , nome)" + 
+    " VALUES ('{}', '{}')".format(cpf, nome))
     conexao.commit()
     pessoa_id = cursor.lastrowid
     conexao.close()
@@ -64,12 +65,12 @@ def buscar_pessoa_por_id(id):
 
 #########  #############     TIPO_TRANSPORTE           ##################   ########
 
-tipo_transporte = Transporte()
 
-def cadastrar_tipo_transporte_db(tipodetransporte):
+
+def cadastrar_tipo_transporte_db(pessoaid, tipo):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO tipo_transporte ('tipo', 'pessoa_id ) VALUES ('{}', '{}')".format(tipodetransporte.tipo, tipodetransporte.pessoa_id ))
+    cursor.execute("INSERT INTO tipo_transporte (tipo, pessoa_id) VALUES ('{}', '{}')".format(tipo, pessoaid))
     conexao.commit()
     transporte_id = cursor.lastrowid
     conexao.close()
@@ -123,12 +124,13 @@ def buscar_tipo_transporte_por_id(id):
 
 #####        ###########    DESTINO    ###########       #######
 
-destino = Destino()
 
-def cadastrar_destino_trans_db(destino):
+
+def cadastrar_destino_trans_db(trans_id, inicial, final):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO destino ('destino_trans_id' ,'inicial','final') VALUES ('{}', '{}','{}')".format(destino.destino_trans_id , destino.inicial , destino.final))
+    cursor.execute("INSERT INTO destino (destino_trans_id, inicial, final)" + 
+    " VALUES ('{}', '{}','{}')".format(trans_id , inicial , final))
     conexao.commit()
     destino_id = cursor.lastrowid
     conexao.close()
@@ -184,10 +186,10 @@ def buscar_em_destino(id):
 
 distancia = Distancia()
 
-def cadastrar_distancia_trans_db(distancia):
+def cadastrar_distancia_trans_db(trans_id, km):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO distancia ('distancia_trans_id' ,'km') VALUES ('{}', '{}')".format(distancia.distancia_trans_id , distancia.km))
+    cursor.execute("INSERT INTO distancia (distancia_trans_id, km) VALUES ('{}', '{}')".format(trans_id , km))
     conexao.commit()
     conexao.close()
 
@@ -243,10 +245,10 @@ def buscar_em_distancia(id):
 
 valores = Valores()
 
-def cadastrar_valores_db(valor):
+def cadastrar_valores_db(trans_id, valor_recebido):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO valor ('valor_trans_id' ,'valor') VALUES ('{}', '{}')".format(valores.valores_trans_id , valores.valor))
+    cursor.execute("INSERT INTO valor (valor_trans_id, valor) VALUES ('{}', '{}')".format(trans_id , valor_recebido))
     conexao.commit()
     conexao.close()
     
@@ -322,33 +324,29 @@ def salvar_todos():
     pessoa = Pessoa()
     pessoa.nome = nome
     pessoa.cpf = cpf 
-    id_pessoa = cadastrar_pessoa_db(pessoa)
+    id_pessoa = cadastrar_pessoa_db(pessoa.nome, pessoa.cpf)  
+    #ao invés de passar como parâmetro o objeto todo, estou passando cada característica.   
     tipodetransporte = Transporte()
     tipodetransporte.pessoa_id = id_pessoa
     tipodetransporte.tipo = tipo_trans
-    tipo_transporte_id =  cadastrar_tipo_transporte_db(tipodetransporte)
-    
+    tipo_transporte_id =  cadastrar_tipo_transporte_db(tipodetransporte.pessoa_id, tipodetransporte.tipo)    
+    #ao invés de passar como parâmetro o objeto todo, estou passando cada característica.
     destino = Destino()
     destino.destino_trans_id = tipo_transporte_id
     destino.inicial = destino_inicial
     destino.final = destino_final
-    cadastrar_destino_trans_db(destino)
-    # cadastrar_destino_trans_db(tipo_transporte_id,  destino_inicial, destino_final)
-
-    
+    cadastrar_destino_trans_db(destino.destino_trans_id, destino.inicial, destino.final)
+    #ao invés de passar como parâmetro o objeto todo, estou passando cada característica.   
     distancia = Distancia()
     distancia.distancia_trans_id = tipo_transporte_id
     distancia.km = km
-    cadastrar_distancia_trans_db(distancia)
-    # cadastrar_distancia_trans_db(tipo_transporte_id, km)
+    cadastrar_distancia_trans_db(distancia.distancia_trans_id, distancia.km)
+    #ao invés de passar como parâmetro o objeto todo, estou passando cada característica.
     valor1 = Valores()
     valor1.valores_trans_id = tipo_transporte_id
     valor1.valores = valor
-    cadastrar_valores_db(valor)
-    # cadastrar_valores_db(tipo_transporte_id, valor)
-
-    
-
+    cadastrar_valores_db(valor1.valores_trans_id, valor1.valores)
+    #ao invés de passar como parâmetro o objeto todo, estou passando cada característica.
     return redirect('/')
 
     
