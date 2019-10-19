@@ -1,4 +1,9 @@
 class Valores:
+    def __init__(self):
+        self.__id= 0
+        self.__valor_trans_id=0
+        self.__valor=0
+
     @property
     def id (self):
         return self.__id

@@ -1,4 +1,9 @@
 class Distancia:
+    def __init__(self):
+        self.__id= 0
+        self.__distancia_trans_id=0
+        self.__km=0
+
     @property
     def id (self):
         return self.__id

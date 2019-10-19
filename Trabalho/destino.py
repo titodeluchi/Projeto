@@ -1,4 +1,10 @@
 class Destino:
+    def __init__(self):
+        self.__id= 0
+        self.__destino_trans_id=0
+        self.__inicial=''
+        self.__final=''
+
     @property
     def id (self):
         return self.__id

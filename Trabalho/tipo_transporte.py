@@ -1,4 +1,9 @@
 class Transporte:
+    def __init__(self):
+        self.__id= 0
+        self.__pessoa_id=0
+        self.__tipo=''
+
     @property
     def id (self):
         return self.__id
