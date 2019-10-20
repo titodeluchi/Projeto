@@ -51,7 +51,7 @@ def alterar_pessoa_db(id, cpf, nome):
 def buscar_pessoa_por_id(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute('SELECT * FROM pessoa WHERE id ={}'.format(id))
+    cursor.execute("SELECT * FROM pessoa WHERE id ={}".format(id))
     p = Pessoa()
     for i in cursor.fetchall():
         p.id = i[0]
