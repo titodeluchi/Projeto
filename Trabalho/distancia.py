@@ -15,7 +15,7 @@ class Distancia:
     def distancia_trans_id(self):
         return self.__distancia_trans_id
     @distancia_trans_id.setter
-    def cpf(self,distancia_trans_id):
+    def distancia_trans_id(self,distancia_trans_id):
         self.__distancia_trans_id = distancia_trans_id
 
     @property
