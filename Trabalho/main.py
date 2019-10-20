@@ -88,7 +88,7 @@ def listar_tipo_transporte_db():
 def editar_tipo_transporte_por_id_db(id, tipo, pessoa_id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE pessoa SET pessoa_id={}, TIPO='{}' WHERE id={}".format(pessoa_id, tipo, id))
+    cursor.execute("UPDATE tipo_transporte SET pessoa_id={}, tipo='{}' WHERE id={}".format(pessoa_id, tipo, id))
     conexao.commit()
     conexao.close()
 
