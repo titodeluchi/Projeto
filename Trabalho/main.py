@@ -43,11 +43,11 @@ def deletar_pessoa(id):
     conexao.commit()
     conexao.close()
 
-def alterar_pessoa_db(pessoa:Pessoa):
+def alterar_pessoa_db(id, cpf, nome):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE pessoa SET( cpf='{}', nome='{}') WHERE id={}"
-    .format(pessoa.cpf, pessoa.nome, pessoa.id))
+    cursor.execute("UPDATE pessoa SET cpf='{}', nome='{}' WHERE id={}"
+    .format(cpf, nome, id))
     conexao.commit()
     conexao.close()
 
@@ -90,11 +90,11 @@ def listar_tipo_transporte_db():
     conexao.close()
     return listar_tipo_transporte
 
-def editar_tipo_transporte_por_id_db(tipo_transporte:Transporte):
+def editar_tipo_transporte_por_id_db(id, tipo, pessoa_id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE pessoa SET( pessoa_id='{}', TIPO='{}') WHERE id={}"
-    .format(tipo_transporte.pessoa_id, tipo_transporte.tipo, tipo_transporte.id))
+    cursor.execute("UPDATE pessoa SET pessoa_id={}, TIPO='{}' WHERE id={}"
+    .format(pessoa_id, tipo, id))
     conexao.commit()
     conexao.close()
 
@@ -150,11 +150,11 @@ def listar_destino_db():
     conexao.close()
     return listar_destino
 
-def editar_destino_db(destino:Destino):
+def editar_destino_db(id, estrangeira, inicial, final):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE destino SET( destino_trans_id ='{}', inicial='{}', final='{}') WHERE id={}"
-    .format(destino.destino_trans_id, destino.inicial,  destino.final, destino.id))
+    cursor.execute("UPDATE destino SET destino_trans_id ={}, inicial='{}', final='{}' WHERE id={}"
+    .format(estrangeira, inicial, final, id))
     conexao.commit()
     conexao.close()
 
@@ -208,11 +208,11 @@ def listar_distancia_db():
     conexao.close()
     return listar_distancia
 
-def editar_distancia_db(distancia:Distancia):
+def editar_distancia_db(id, estrangeira, distancia):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE distancia SET( distancia_trans_id='{}', km='{}') WHERE id={}"
-    .format(distancia.distancia_trans_id, distancia.km,  distancia.id))
+    cursor.execute("UPDATE distancia SET distancia_trans_id={}, km={} WHERE id={}"
+    .format(estrangeira, distancia, id))
     conexao.commit()
     conexao.close()
 
@@ -267,11 +267,11 @@ def listar_valores_db():
     conexao.close()
     return listar_valor
 
-def editar_valor_db(valores:Valores):
+def editar_valor_db(id, estrangeira, valor):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE valor SET( valor_trans_id='{}', valor='{}') WHERE id={}"
-    .format(valores.valores_trans_id, valores.valor,  valores.id))
+    cursor.execute("UPDATE valor SET valor_trans_id={}, valor={} WHERE id={}"
+    .format(estrangeira, valor, id))
     conexao.commit()
     conexao.close()
 
@@ -359,5 +359,53 @@ def listar():
     lista_volta_distancia = listar_distancia_db()
     lista_volta_valores = listar_valores_db()
     return render_template('listar.html', lista_pessoa = lista_volta_pessoa, lista_tipo= lista_volta_tipo, lista_destino = lista_volta_destino, lista_distancia = lista_volta_distancia, lista_valores = lista_volta_valores)
+
+@app.route('/alterar')
+def alterar_geral():
+    id = request.args['id']
+    alteracao_pessoa = buscar_pessoa_por_id(id)
+    alteracao_tipo = buscar_tipo_transporte_por_id(id)
+    alteracao_destino = buscar_em_destino(id)
+    alteracao_distancia = buscar_em_distancia(id)
+    alteracao_valores = buscar_em_valores(id)
+    return render_template('edit_del.html', alteracao_pessoa = alteracao_pessoa, alteracao_tipo = alteracao_tipo, alteracao_destino = alteracao_destino, alteracao_distancia = alteracao_distancia, alteracao_valores = alteracao_valores)
+
+@app.route('alterar/salvar', methods=['POST'])
+def alterar_categoria_salvar():
+    id = request.form['id']
+    nome = request.form['nome']
+    cpf = request.form['cpf']
+    tipo_trans = request.form['tipo']   
+    destino_inicial = request.form['inicial']
+    destino_final = request.form['final']  
+    km = request.form['km']  
+    valor = request.form['valor']
+    pessoa = Pessoa()
+    pessoa.id = id
+    pessoa.nome = nome
+    pessoa.cpf = cpf 
+    alterar_pessoa_db(pessoa.id, pessoa.cpf, pessoa.nome)  
+    tipodetransporte = Transporte()
+    tipodetransporte.id = id
+    tipodetransporte.tipo = tipo_trans
+    tipodetransporte.pessoa_id = id
+    editar_tipo_transporte_por_id_db(tipodetransporte.id, tipodetransporte.tipo, tipodetransporte.pessoa_id)    
+    destino = Destino()
+    destino.id = id
+    destino.destino_trans_id = id
+    destino.inicial = destino_inicial
+    destino.final = destino_final
+    editar_destino_db(destino.id, destino.destino_trans_id, destino.inicial, destino.final)   
+    distancia = Distancia()
+    distancia.id = id
+    distancia.distancia_trans_id = id
+    distancia.km = km
+    editar_distancia_db(distancia.id, distancia.distancia_trans_id, distancia.km)
+    valor1 = Valores()
+    valor1.valores_trans_id = id
+    valor1.id = id
+    valor1.valores = valor
+    editar_valor_db(valor1.id, valor1.valores_trans_id, valor1.valores)
+    return redirect('/listar')
 
 app.run()

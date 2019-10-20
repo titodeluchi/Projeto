@@ -30,35 +30,35 @@
                     </tr>
                 </td>
             {% endfor %}
-            {% for i in lista_tipo %}    
+            {% for j in lista_tipo %}    
                 <td>
                     <tr>
-                        <td>{{i.tipo}}</td>
+                        <td>{{j.tipo}}</td>
                     </tr>
                 </td>
             {% endfor %}
-            {% for i in lista_destino %}
+            {% for k in lista_destino %}
                 <td>
                     <tr>
-                        <td>{{i.inicial}}</td>
-                        <td>{{i.final}}</td>
+                        <td>{{k.inicial}}</td>
+                        <td>{{k.final}}</td>
                     </tr>
                 </td>
             {% endfor %}
-            {% for i in lista_distancia %}
+            {% for l in lista_distancia %}
                 <td>
                     <tr>
-                        <td>{{i.km}}</td>
+                        <td>{{l.km}}</td>
                     </tr>
                 </td>
             {% endfor %}
-            {% for i in lista_valores %}
+            {% for m in lista_valores %}
                 <td>
                     <tr>
-                        <td>{{i.valor}}</td>                                               
+                        <td>{{m.valor}}</td>                                               
                         <td>
                             <a href="/produto/delete?id={{i.id}}">Deletar</a>
-                            <a href="/produto/alterar?id={{i.id}}">Alterar</a>
+                            <a href="/alterar?id={{i.id}}">Alterar</a>
                         </td>
                     </tr>
                 </td>

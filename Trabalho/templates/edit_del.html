@@ -2,6 +2,20 @@
 
 {% block index %}
 
+  <div class= "formulario">
+    <form action="/alterar/salvar" method="POST"> 
+        <input type="hidden" name="id" value="{{alteracao_pessoa.id}}">
+        <input class="input" type="text" placeholder="cpf" name="cpf" value="{{alteracao_pessoa.cpf}}" > 
+        <input class="input" type="text" placeholder="nome" name="nome" value="{{alteracao_pessoa.nome}}">
+        <input class="input" type="text" placeholder="tipo" name="tipo" value="{{alteracao_tipo.tipo}}">
+        <input class="input" type="text" placeholder="inicial" name="inicial" value="{{alteracao_destino.inicial}}" > 
+        <input class="input" type="text" placeholder="final" name="final" value="{{alteracao_destino.final}}">
+        <input class="input" type="text" placeholder="distancia" name="km" value="{{alteracao_distancia.km}}">
+        <input class="input" type="text" placeholder="valor" name="valor" value="{{alteracao_valores.valor}}">                
+        <input type="submit" value="salvar">        
+    </form>
+
+  </div>
 
 
 
