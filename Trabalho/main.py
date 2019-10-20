@@ -139,7 +139,7 @@ def cadastrar_destino_trans_db(trans_id, inicial, final):
 def listar_destino_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("SELECT * destino")
+    cursor.execute("SELECT * FROM destino")
     listar_destino = []
     for i in cursor.fetchall():
         destino = Destino()
@@ -197,7 +197,7 @@ def cadastrar_distancia_trans_db(trans_id, km):
 def listar_distancia_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("SELECT * distancia")
+    cursor.execute("SELECT * FROM distancia")
     listar_distancia = []
     for i in cursor.fetchall():
         distancia = Distancia()
@@ -256,7 +256,7 @@ def cadastrar_valores_db(trans_id, valor_recebido):
 def listar_valores_db():
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("SELECT * valor")
+    cursor.execute("SELECT * FROM valor")
     listar_valor = []
     for i in cursor.fetchall():
         valores = Valores()
@@ -350,9 +350,14 @@ def salvar_todos():
     return redirect('/')
 
     
-
+lista = []
 @app.route('/lista')
 def listar():
-    return render_template('listar.html')
+    lista.append(listar_pessoa_db())
+    lista.append(listar_tipo_transporte_db())
+    lista.append(listar_destino_db())
+    lista.append(listar_distancia_db())
+    lista.append(listar_valores_db())
+    return render_template('listar.html', lista=lista)
 
 app.run()
