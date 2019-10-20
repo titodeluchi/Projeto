@@ -102,7 +102,7 @@ def deletar_tipo_transporte(id):
 def buscar_tipo_transporte_por_id(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute('SELECT * FROM tipo_transporte WHERE id ={}'.format(id))
+    cursor.execute("SELECT * FROM tipo_transporte WHERE id ={}".format(id))
     t = Transporte()
     for i in cursor.fetchall():
         t.id = i[0]
@@ -154,7 +154,7 @@ def deletar_destino(id):
 def buscar_em_destino(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute('SELECT * FROM destino WHERE id ={}'.format(id))
+    cursor.execute("SELECT * FROM destino WHERE id ={}".format(id))
     d = Destino()
     for i in cursor.fetchall():
         d.id = i[0]
@@ -206,7 +206,7 @@ def deletar_distancia(id):
 def buscar_em_distancia(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute('SELECT * FROM distancia WHERE id ={}'.format(id))
+    cursor.execute("SELECT * FROM distancia WHERE id ={}".format(id))
     dist = Distancia()
     for i in cursor.fetchall():
         dist.id = i[0]
@@ -258,7 +258,7 @@ def deletar_valor(id):
 def buscar_em_valores(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute('SELECT * FROM valor WHERE id ={}'.format(id))
+    cursor.execute("SELECT * FROM valor WHERE id ={}".format(id))
     valor = Valores()
     for i in cursor.fetchall():
         valor.id = i[0]
