@@ -65,7 +65,7 @@ def buscar_pessoa_por_id(id):
 def cadastrar_tipo_transporte_db(pessoaid, tipo):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO tipo_transporte (tipo, pessoa_id) VALUES ('{}', '{}')".format(tipo, pessoaid))
+    cursor.execute("INSERT INTO tipo_transporte (tipo, pessoa_id) VALUES ('{}', {})".format(tipo, pessoaid))
     conexao.commit()
     transporte_id = cursor.lastrowid
     conexao.close()
@@ -117,7 +117,7 @@ def cadastrar_destino_trans_db(trans_id, inicial, final):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
     cursor.execute("INSERT INTO destino (destino_trans_id, inicial, final)" + 
-    " VALUES ('{}', '{}','{}')".format(trans_id , inicial , final))
+    " VALUES ({}, '{}','{}')".format(trans_id , inicial , final))
     conexao.commit()
     destino_id = cursor.lastrowid
     conexao.close()
@@ -171,7 +171,7 @@ distancia = Distancia()
 def cadastrar_distancia_trans_db(trans_id, km):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO distancia (distancia_trans_id, km) VALUES ('{}', '{}')".format(trans_id , km))
+    cursor.execute("INSERT INTO distancia (distancia_trans_id, km) VALUES ({}, {})".format(trans_id , km))
     conexao.commit()
     conexao.close()
 
@@ -223,7 +223,7 @@ valores = Valores()
 def cadastrar_valores_db(trans_id, valor_recebido):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO valor (valor_trans_id, valor) VALUES ('{}', '{}')".format(trans_id , valor_recebido))
+    cursor.execute("INSERT INTO valor (valor_trans_id, valor) VALUES ({}, {})".format(trans_id , valor_recebido))
     conexao.commit()
     conexao.close()
     
