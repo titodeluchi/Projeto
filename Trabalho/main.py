@@ -46,8 +46,7 @@ def deletar_pessoa(id):
 def alterar_pessoa_db(id, cpf, nome):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE pessoa SET cpf='{}', nome='{}' WHERE id={}"
-    .format(cpf, nome, id))
+    cursor.execute("UPDATE pessoa SET cpf='{}', nome='{}' WHERE id={}".format(cpf, nome, id))
     conexao.commit()
     conexao.close()
 
@@ -93,8 +92,7 @@ def listar_tipo_transporte_db():
 def editar_tipo_transporte_por_id_db(id, tipo, pessoa_id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE pessoa SET pessoa_id={}, TIPO='{}' WHERE id={}"
-    .format(pessoa_id, tipo, id))
+    cursor.execute("UPDATE pessoa SET pessoa_id={}, TIPO='{}' WHERE id={}".format(pessoa_id, tipo, id))
     conexao.commit()
     conexao.close()
 
@@ -153,8 +151,7 @@ def listar_destino_db():
 def editar_destino_db(id, estrangeira, inicial, final):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE destino SET destino_trans_id ={}, inicial='{}', final='{}' WHERE id={}"
-    .format(estrangeira, inicial, final, id))
+    cursor.execute("UPDATE destino SET destino_trans_id ={}, inicial='{}', final='{}' WHERE id={}".format(estrangeira, inicial, final, id))
     conexao.commit()
     conexao.close()
 
@@ -211,8 +208,7 @@ def listar_distancia_db():
 def editar_distancia_db(id, estrangeira, distancia):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE distancia SET distancia_trans_id={}, km={} WHERE id={}"
-    .format(estrangeira, distancia, id))
+    cursor.execute("UPDATE distancia SET distancia_trans_id={}, km={} WHERE id={}".format(estrangeira, distancia, id))
     conexao.commit()
     conexao.close()
 
@@ -270,8 +266,7 @@ def listar_valores_db():
 def editar_valor_db(id, estrangeira, valor):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
-    cursor.execute("UPDATE valor SET valor_trans_id={}, valor={} WHERE id={}"
-    .format(estrangeira, valor, id))
+    cursor.execute("UPDATE valor SET valor_trans_id={}, valor={} WHERE id={}".format(estrangeira, valor, id))
     conexao.commit()
     conexao.close()
 
@@ -370,8 +365,8 @@ def alterar_geral():
     alteracao_valores = buscar_em_valores(id)
     return render_template('edit_del.html', alteracao_pessoa = alteracao_pessoa, alteracao_tipo = alteracao_tipo, alteracao_destino = alteracao_destino, alteracao_distancia = alteracao_distancia, alteracao_valores = alteracao_valores)
 
-@app.route('alterar/salvar', methods=['POST'])
-def alterar_categoria_salvar():
+@app.route('/alterar/salvar', methods=['POST'])
+def alterar_salvar():
     id = request.form['id']
     nome = request.form['nome']
     cpf = request.form['cpf']
