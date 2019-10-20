@@ -97,7 +97,7 @@ def editar_tipo_transporte_por_id_db(id, tipo, pessoa_id):
     conexao.close()
 
 
-def deletar_tipo_transporte():
+def deletar_tipo_transporte(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
     cursor.execute("DELETE FROM tipo_transporte WHERE id={}".format(id))
@@ -156,7 +156,7 @@ def editar_destino_db(id, estrangeira, inicial, final):
     conexao.close()
 
 
-def deletar_destino():
+def deletar_destino(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
     cursor.execute("DELETE FROM destino WHERE id={}".format(id))
@@ -213,7 +213,7 @@ def editar_distancia_db(id, estrangeira, distancia):
     conexao.close()
 
 
-def deletar_distancia():
+def deletar_distancia(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
     cursor.execute("DELETE FROM distancia WHERE id={}".format(id))
@@ -271,7 +271,7 @@ def editar_valor_db(id, estrangeira, valor):
     conexao.close()
 
 
-def deletar_valor():
+def deletar_valor(id):
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
     cursor = conexao.cursor()
     cursor.execute("DELETE FROM valor WHERE id={}".format(id))
@@ -363,7 +363,7 @@ def alterar_geral():
     alteracao_destino = buscar_em_destino(id)
     alteracao_distancia = buscar_em_distancia(id)
     alteracao_valores = buscar_em_valores(id)
-    return render_template('edit_del.html', alteracao_pessoa = alteracao_pessoa, alteracao_tipo = alteracao_tipo, alteracao_destino = alteracao_destino, alteracao_distancia = alteracao_distancia, alteracao_valores = alteracao_valores)
+    return render_template('atualizar.html', alteracao_pessoa = alteracao_pessoa, alteracao_tipo = alteracao_tipo, alteracao_destino = alteracao_destino, alteracao_distancia = alteracao_distancia, alteracao_valores = alteracao_valores)
 
 @app.route('/alterar/salvar', methods=['POST'])
 def alterar_salvar():
@@ -401,6 +401,16 @@ def alterar_salvar():
     valor1.id = id
     valor1.valores = valor
     editar_valor_db(valor1.id, valor1.valores_trans_id, valor1.valores)
+    return redirect('/listar')
+
+@app.route('/deletar')
+def apagar():
+    id = request.args['id']
+    deletar_valor(id)
+    deletar_distancia(id)
+    deletar_destino(id)
+    deletar_tipo_transporte(id)
+    deletar_pessoa(id)
     return redirect('/listar')
 
 app.run()
