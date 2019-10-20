@@ -3,7 +3,7 @@
 {% block index %}
 
   <div class= "formulario">
-    <form action="/alterar/salvar" method="POST"> 
+    <form action="/alterar/salvar" method="PUT"> 
         <input type="hidden" name="id" value="{{alteracao_pessoa.id}}">
         <input class="input" type="text" placeholder="cpf" name="cpf" value="{{alteracao_pessoa.cpf}}"> 
         <input class="input" type="text" placeholder="nome" name="nome" value="{{alteracao_pessoa.nome}}">
