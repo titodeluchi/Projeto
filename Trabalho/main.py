@@ -350,14 +350,15 @@ def salvar_todos():
     return redirect('/')
 
     
-lista = []
-@app.route('/lista')
+
+@app.route('/listar')
 def listar():
-    lista.append(listar_pessoa_db())
-    lista.append(listar_tipo_transporte_db())
-    lista.append(listar_destino_db())
-    lista.append(listar_distancia_db())
-    lista.append(listar_valores_db())
-    return render_template('listar.html', lista=lista)
+    lista_volta_pessoa = listar_pessoa_db()
+    lista_volta_tipo = listar_tipo_transporte_db()
+    lista_volta_destino = listar_destino_db()
+    lista_volta_distancia = listar_distancia_db()
+    lista_volta_valores = listar_valores_db()
+    lista = [lista_volta_pessoa, lista_volta_tipo, lista_volta_destino, lista_volta_distancia, lista_volta_valores]
+    return render_template('listar.html', lista = lista)
 
 app.run()
