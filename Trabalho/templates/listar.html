@@ -23,6 +23,10 @@
 
             {% for i in lista_pessoa %}
                 <td>
+                    <a href="/deletar?id={{i.id}}">Deletar</a>
+                    <a href="/alterar?id={{i.id}}">Alterar</a>
+                </td>
+                <td>
                     <tr>
                         <td>{{i.id}}</td>
                         <td>{{i.nome}}</td>
@@ -56,10 +60,7 @@
                 <td>
                     <tr>
                         <td>{{m.valor}}</td>                                               
-                        <td>
-                            <a href="/deletar?id={{i.id}}">Deletar</a>
-                            <a href="/alterar?id={{i.id}}">Alterar</a>
-                        </td>
+
                     </tr>
                 </td>
             {% endfor %}
