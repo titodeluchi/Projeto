@@ -358,7 +358,6 @@ def listar():
     lista_volta_destino = listar_destino_db()
     lista_volta_distancia = listar_distancia_db()
     lista_volta_valores = listar_valores_db()
-    lista = [lista_volta_pessoa, lista_volta_tipo, lista_volta_destino, lista_volta_distancia, lista_volta_valores]
-    return render_template('listar.html', lista = lista)
+    return render_template('listar.html', lista_pessoa = lista_volta_pessoa, lista_tipo= lista_volta_tipo, lista_destino = lista_volta_destino, lista_distancia = lista_volta_distancia, lista_valores = lista_volta_valores)
 
 app.run()

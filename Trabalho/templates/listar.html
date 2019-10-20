@@ -19,24 +19,53 @@
     </thead>
     <tbody>
         
-        {% for i in lista %}
-        
-            <tr>
-                <td>{{i.id}}</td>
-                <td>{{i.nome}}</td>
-                <td>{{i.cpf}}</td>
-                <td>{{i.tipo}}</td>
-                <td>{{i.inicial}}</td>
-                <td>{{i.final}}</td>
-                <td>{{i.km}}</td>
-                <td>{{i.valor}}</td>                                               
+        <tr>
+
+            {% for i in lista_pessoa %}
                 <td>
-                    <a href="/produto/delete?id={{i.id}}">Deletar</a>
-                    <a href="/produto/alterar?id={{i.id}}">Alterar</a>
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.nome}}</td>
+                        <td>{{i.cpf}}</td>
+                    </tr>
                 </td>
+            {% endfor %}
+            {% for i in lista_tipo %}    
+                <td>
+                    <tr>
+                        <td>{{i.tipo}}</td>
+                    </tr>
+                </td>
+            {% endfor %}
+            {% for i in lista_destino %}
+                <td>
+                    <tr>
+                        <td>{{i.inicial}}</td>
+                        <td>{{i.final}}</td>
+                    </tr>
+                </td>
+            {% endfor %}
+            {% for i in lista_distancia %}
+                <td>
+                    <tr>
+                        <td>{{i.km}}</td>
+                    </tr>
+                </td>
+            {% endfor %}
+            {% for i in lista_valores %}
+                <td>
+                    <tr>
+                        <td>{{i.valor}}</td>                                               
+                        <td>
+                            <a href="/produto/delete?id={{i.id}}">Deletar</a>
+                            <a href="/produto/alterar?id={{i.id}}">Alterar</a>
+                        </td>
+                    </tr>
+                </td>
+            {% endfor %}
             
-            </tr>
-        {% endfor %}
+        </tr>
+
 
     </tbody>    
 </table>
