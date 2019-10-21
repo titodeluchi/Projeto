@@ -90,4 +90,5 @@ body{
 }
 .carro, .metro, .onibus{
     float: left;
+    height: 1%;
 }

@@ -19,55 +19,49 @@
     </thead>
     <tbody>
         
-        <tr>
+        <div class="pessoa">
 
             {% for i in lista_pessoa %}
-                <td>
-                    <a href="/deletar?id={{i.id}}">Deletar</a>
-                    <a href="/alterar?id={{i.id}}">Alterar</a>
-                </td>
-                <td>
-                    <tr>
-                        <td>{{i.id}}</td>
-                        <td>{{i.nome}}</td>
-                        <td>{{i.cpf}}</td>
-                    </tr>
-                </td>
+                <tr>
+                    <td>
+                        <a href="/deletar?id={{i.id}}">Deletar</a>
+                        <a href="/alterar?id={{i.id}}">Alterar</a>
+                    </td>
+                    <td>{{i.id}}</td>
+                    <td>{{i.nome}}</td>
+                    <td>{{i.cpf}}</td>
+                </tr>
             {% endfor %}
+        </div>
+        <div class="tipo">
             {% for j in lista_tipo %}    
-                <td>
-                    <tr>
-                        <td>{{j.tipo}}</td>
-                    </tr>
-                </td>
+                <tr>
+                    <td>{{j.tipo}}</td>
+                </tr>    
             {% endfor %}
+        </div>
+        <div class="destino">
             {% for k in lista_destino %}
-                <td>
-                    <tr>
-                        <td>{{k.inicial}}</td>
-                        <td>{{k.final}}</td>
-                    </tr>
-                </td>
+                <tr>
+                    <td>{{k.inicial}}</td>
+                    <td>{{k.final}}</td>
+                </tr>
             {% endfor %}
+        </div>   
+        <div class="distancia"> 
             {% for l in lista_distancia %}
-                <td>
-                    <tr>
-                        <td>{{l.km}}</td>
-                    </tr>
-                </td>
+                <tr>
+                    <td>{{l.km}}</td>
+                </tr>    
             {% endfor %}
+        </div>
+        <div class="valores"></div>    
             {% for m in lista_valores %}
-                <td>
-                    <tr>
-                        <td>{{m.valor}}</td>                                               
-
-                    </tr>
-                </td>
+                <tr>
+                    <td>{{m.valor}}</td>                                               
+                </tr>    
             {% endfor %}
-            
-        </tr>
-
-
+        </div>    
     </tbody>    
 </table>
 
