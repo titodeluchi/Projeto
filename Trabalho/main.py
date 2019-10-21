@@ -398,4 +398,4 @@ def apagar():
     deletar_pessoa(id)
     return redirect('/listar')
 
-app.run(debug=True)
+app.run()
