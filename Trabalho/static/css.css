@@ -17,19 +17,19 @@ body{
     text-transform: uppercase;
     text-align: center;  
 }
-.cabecalho .menu{
+.cabecalho .menus{
     width: 100%;
     height: 50%;
     list-style: none;
 }
-.cabecalho .menu li{
+.cabecalho .menus li{
     float: left;
     padding: 0.5em 0.5em;
 }
-.cabecalho .menu li:hover{
+.cabecalho .menus li:hover{
     background: #005F6B;
 }
-.cabecalho .menu li a {
+.cabecalho .menus li a {
     text-decoration: none;
     text-transform: uppercase;
     color: black;
