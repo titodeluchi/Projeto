@@ -93,8 +93,8 @@ def listar_tipo_transporte_db():
     for i in cursor.fetchall():
         tipo_transporte = Transporte()
         tipo_transporte.id = i[0]
-        tipo_transporte.pessoa_id = i[1]
-        tipo_transporte.tipo = i[2]
+        tipo_transporte.tipo = i[1]
+        tipo_transporte.pessoa_id = i[2]
         listar_tipo_transporte.append(tipo_transporte)    
     conexao.close()
     return listar_tipo_transporte
@@ -120,8 +120,8 @@ def buscar_tipo_transporte_por_id(id):
     t = Transporte()
     for i in cursor.fetchall():
         t.id = i[0]
-        t.pessoa_id = i[1]
-        t.tipo = i[2]
+        t.tipo = i[1]
+        t.pessoa_id = i[2]
     conexao.close()
     return t    
 

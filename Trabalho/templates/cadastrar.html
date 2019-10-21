@@ -2,11 +2,11 @@
 
 {% block index %}
 
-  <h1>Cadastrar Transporte!</h1>
+  <h1 class="cadastro">Cadastrar Transporte!</h1>
   <div class= "formulario">
     <form action="/geral/salvar" method="POST"> 
-        <input class="input" type="text" placeholder="Nome" name="nome"> 
-        <input class="input" type="text" placeholder="CPF" name="cpf">
+        <input class="input" type="text" placeholder="CPF" name="nome"> 
+        <input class="input" type="text" placeholder="Nome" name="cpf">
         <input class="input" type="text" placeholder="Tipo Transporte" name="tipo">
         <input class="input" type="text" placeholder="Destino Inicial" name="inicial">
         <input class="input" type="text" placeholder="Destino Final" name="final">
