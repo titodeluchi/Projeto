@@ -350,7 +350,7 @@ def alterar_geral():
     alteracao_valores = buscar_em_valores(id)
     return render_template('atualizar.html', alteracao_pessoa = alteracao_pessoa, alteracao_tipo = alteracao_tipo, alteracao_destino = alteracao_destino, alteracao_distancia = alteracao_distancia, alteracao_valores = alteracao_valores)
 
-@app.route('/alterar/salvar', methods=['PUT'])
+@app.route('/alterar/salvar', methods=['POST'])
 def alterar_salvar():
     id = request.form['id']
     nome = request.form['nome']
