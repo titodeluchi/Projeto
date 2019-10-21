@@ -18,56 +18,22 @@
         </tr>
     </thead>
     <tbody>
-        
-        <tr>
-
-            {% for i in lista_pessoa %}
+        {% for i in lista %}
+            <tr>               
+                <td>{{i.id}}</td>
+                <td>{{i.nome}}</td>
+                <td>{{i.cpf}}</td>
+                <td>{{i.tipo}}</td>
+                <td>{{i.inicial}}</td>
+                <td>{{i.final}}</td>
+                <td>{{i.km}}</td>
+                <td>{{i.valor}}</td>                                               
                 <td>
                     <a href="/deletar?id={{i.id}}">Deletar</a>
                     <a href="/alterar?id={{i.id}}">Alterar</a>
                 </td>
-                <td>
-                    <tr>
-                        <td>{{i.id}}</td>
-                        <td>{{i.nome}}</td>
-                        <td>{{i.cpf}}</td>
-                    </tr>
-                </td>
-            {% endfor %}
-            {% for j in lista_tipo %}    
-                <td>
-                    <tr>
-                        <td>{{j.tipo}}</td>
-                    </tr>
-                </td>
-            {% endfor %}
-            {% for k in lista_destino %}
-                <td>
-                    <tr>
-                        <td>{{k.inicial}}</td>
-                        <td>{{k.final}}</td>
-                    </tr>
-                </td>
-            {% endfor %}
-            {% for l in lista_distancia %}
-                <td>
-                    <tr>
-                        <td>{{l.km}}</td>
-                    </tr>
-                </td>
-            {% endfor %}
-            {% for m in lista_valores %}
-                <td>
-                    <tr>
-                        <td>{{m.valor}}</td>                                               
-
-                    </tr>
-                </td>
-            {% endfor %}
-            
-        </tr>
-
-
+            </tr>
+        {% endfor %}
     </tbody>    
 </table>
 

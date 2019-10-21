@@ -6,9 +6,23 @@ from distancia import Distancia
 from valor import Valores
 import MySQLdb
 
+from models.corrida import Corrida
+
 ####################         ########   PESSOA    ################   ####################
 
+def listar_tudo():
+    conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
+    cursor = conexao.cursor()
+    cursor.execute("SELECT p.id ,p.nome ,p.cpf ,tt.tipo ,d.inicial ,d.`final` ,ds.km ,v.valor FROM pessoa as p"
+                    +" JOIN tipo_transporte as tt on tt.pessoa_id = p.id join destino as d on d.destino_trans_id = tt.id join distancia as ds"
+                    + " on ds.distancia_trans_id = tt.id join valor as v on v.valor_trans_id = tt.id")
 
+    lista_corridas = []
+    for c in cursor.fetchall():
+        corrida = Corrida(c[0], c[1], c[2], c[3], c[4], c[5], c[6], c[7])
+        lista_corridas.append(corrida)
+    conexao.close()
+    return lista_corridas
 
 def cadastrar_pessoa_db(cpf, nome):   
     conexao = MySQLdb.connect(host="mysql.zuplae.com", user="zuplae06", passwd="grupo01", database="zuplae06")
@@ -318,12 +332,13 @@ def salvar_todos():
 
 @app.route('/listar')
 def listar():
-    lista_volta_pessoa = listar_pessoa_db()
-    lista_volta_tipo = listar_tipo_transporte_db()
-    lista_volta_destino = listar_destino_db()
-    lista_volta_distancia = listar_distancia_db()
-    lista_volta_valores = listar_valores_db()
-    return render_template('listar.html', lista_pessoa = lista_volta_pessoa, lista_tipo= lista_volta_tipo, lista_destino = lista_volta_destino, lista_distancia = lista_volta_distancia, lista_valores = lista_volta_valores)
+    # lista_volta_pessoa = listar_pessoa_db()
+    # lista_volta_tipo = listar_tipo_transporte_db()
+    # lista_volta_destino = listar_destino_db()
+    # lista_volta_distancia = listar_distancia_db()
+    # lista_volta_valores = listar_valores_db()
+    lista_corridas = listar_tudo()
+    return render_template('listar.html', lista = lista_corridas)
 
 @app.route('/alterar')
 def alterar_geral():
@@ -383,4 +398,4 @@ def apagar():
     deletar_pessoa(id)
     return redirect('/listar')
 
-app.run()
+app.run(debug=True)
