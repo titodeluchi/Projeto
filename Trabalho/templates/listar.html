@@ -2,7 +2,38 @@
 
 {% block index %}
 
+    <h1 class="cadastro">Lista de transportes!</h1>
 
-
-
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Tipo de Transporte</th>
+            <th scope="col">Destino Inicial</th>
+            <th scope="col">Destino Final</th>
+            <th scope="col">Distância em Km</th>
+            <th scope="col">Valor em R$</th>            
+          </tr>
+        </thead>
+        <tbody>
+            {% for i in lista %}
+                <tr>               
+                    <td scope="row">{{i.id}}</td>
+                    <td>{{i.nome}}</td>
+                    <td>{{i.cpf}}</td>
+                    <td>{{i.tipo}}</td>
+                    <td>{{i.inicial}}</td>
+                    <td>{{i.final}}</td>
+                    <td>{{i.km}}</td>
+                    <td>{{i.valor}}</td>                                               
+                    <td>
+                        <button type="button" class="btn btn-dark"><a href="/deletar?id={{i.id}}">Deletar</a></button>
+                        <button type="button" class="btn btn-dark"><a href="/alterar?id={{i.id}}">Alterar</a></button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

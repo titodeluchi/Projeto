@@ -2,7 +2,17 @@
 
 {% block index %}
 
-
-
+  <h1 class="cadastro">Cadastrar Transporte!</h1>
+  <div class= "formulario">
+    <form action="/geral/salvar" method="POST"> 
+        <input class="input" type="text" placeholder="CPF" name="nome"> 
+        <input class="input" type="text" placeholder="Nome" name="cpf">
+        <input class="input" type="text" placeholder="Tipo Transporte" name="tipo">
+        <input class="input" type="text" placeholder="Destino Inicial" name="inicial">
+        <input class="input" type="text" placeholder="Destino Final" name="final">
+        <input class="input" type="text" placeholder="KM" name="km">
+        <input class="input" type="text" placeholder="Valor" name="valor">            
+        <input type="submit" value="salvar">
+  </div>
 
 {% endblock %}

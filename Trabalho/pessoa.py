@@ -1,7 +1,17 @@
 class Pessoa:
     def __init__(self):
-        self.__cpf = ''
-        self.__nome = ''
+        self.__id= 0
+        self.__cpf=''
+        self.__nome=''
+
+    @property
+    def id (self):
+        return self.__id
+    @id.setter
+    def id(self,id):
+        self.__id = id
+    
+
 
     @property
     def cpf(self):
@@ -9,6 +19,8 @@ class Pessoa:
     @cpf.setter
     def cpf(self,cpf):
         self.__cpf = cpf
+
+
 
     @property
     def nome(self):
